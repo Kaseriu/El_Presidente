@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonReader {
 
-    public static void setupIslandFromJson(String path){
+    public static Island setupIslandFromJson(String path){
+
+        Island island = new Island();
 
         try {
             // create object mapper instance
@@ -14,14 +16,16 @@ public class JsonReader {
             mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 
             // convert JSON string to Island object
-            Island island = mapper.readValue(Paths.get(path).toFile(), Island.class);
+            island = mapper.readValue(Paths.get(path).toFile(), Island.class);
 
             // print Island
-            System.out.println(island.toString());
+//            System.out.println(island.toString());
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        return island;
     }
 
     public static void getEventsFromJson(String path) {

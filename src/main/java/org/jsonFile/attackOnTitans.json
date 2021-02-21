@@ -102,67 +102,69 @@
             {
               "partisans": -1000
             }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Ils détournent leur chemin ! Ils s'attaquent à l'agriculture à l'avant du Royaume...",
-      "choices": [
-        {
-          "choice": "J'élabore une stratégie pour combattre",
-          "effects": [
+          ],
+          "relatedEvents": [
             {
-              "actionOnFaction": {
-                "ECOLOGISTS": 20,
-                "NATIONALISTS": 20
-              }
-            }
-          ]
-        },
-        {
-          "choice": "Je laisse tomber en me disant que j'ai d'autres champs et réserves de provisions",
-          "effects": [
-            {
-              "actionOnFaction": {
-                "ECOLOGISTS": -20,
-                "LOYALISTS": 30
-              }
+              "name": "Ils détournent leur chemin ! Ils s'attaquent à l'agriculture à l'avant du Royaume...",
+              "choices": [
+                {
+                  "choice": "J'élabore une stratégie pour combattre",
+                  "effects": [
+                    {
+                      "actionOnFaction": {
+                        "ECOLOGISTS": 20,
+                        "NATIONALISTS": 20
+                      }
+                    }
+                  ]
+                },
+                {
+                  "choice": "Je laisse tomber en me disant que j'ai d'autres champs et réserves de provisions",
+                  "effects": [
+                    {
+                      "actionOnFaction": {
+                        "ECOLOGISTS": -20,
+                        "LOYALISTS": 30
+                      }
+                    },
+                    {
+                      "actionOnFactor": {
+                        "AGRICULTURE": -30
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
-              "actionOnFactor": {
-                "AGRICULTURE": -30
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Un valeureux soldat du nom de Rivaille se propose d'aller tuer ces bêtes sauvages...",
-      "choices": [
-        {
-          "choice": "Je le laisse aller défendre ma patrie, celle d'El Presidente, dans le risque que Rivaille décède",
-          "effects": [
-            {
-              "actionOnFaction": {
-                "MILITARISTS": -30,
-                "NATIONALISTS": 20,
-                "CAPITALISTS": 20
-              }
-            }
-          ]
-        },
-        {
-          "choice": "J'empèche Rivaille d'aller affronter ces bêtes farouches tout seul",
-          "effects": [
-            {
-              "actionOnFaction": {
-                "MILITARISTS": 20,
-                "LOYALISTS": 10,
-                "NATIONALISTS": -20,
-                "CAPITALISTS": -20
-              }
+              "name": "Un valeureux soldat du nom de Rivaille se propose d'aller tuer ces bêtes sauvages...",
+              "choices": [
+                {
+                  "choice": "Je le laisse aller défendre ma patrie, celle d'El Presidente, dans le risque que Rivaille décède",
+                  "effects": [
+                    {
+                      "actionOnFaction": {
+                        "MILITARISTS": -30,
+                        "NATIONALISTS": 20,
+                        "CAPITALISTS": 20
+                      }
+                    }
+                  ]
+                },
+                {
+                  "choice": "J'empèche Rivaille d'aller affronter ces bêtes farouches tout seul",
+                  "effects": [
+                    {
+                      "actionOnFaction": {
+                        "MILITARISTS": 20,
+                        "LOYALISTS": 10,
+                        "NATIONALISTS": -20,
+                        "CAPITALISTS": -20
+                      }
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

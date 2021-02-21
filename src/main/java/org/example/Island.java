@@ -9,6 +9,7 @@ import java.util.Random;
 public class Island {
 
     private String name;
+    private String story;
     private int agriculturePercentage;
     private int industryPercentage;
     private int treasury;
@@ -20,9 +21,10 @@ public class Island {
 
     public Island(){}
 
-    public Island(String name, int agriculturePercentage, int industryPercentage, int treasury, int foodUnits, String difficulty, List<Faction> factions) {
+    public Island(String name, String story, int agriculturePercentage, int industryPercentage, int treasury, int foodUnits, String difficulty, List<Faction> factions) {
 
         this.name = name;
+        this.story = story;
         this.agriculturePercentage = agriculturePercentage;
         this.industryPercentage = industryPercentage;
         this.treasury = treasury;
@@ -33,6 +35,10 @@ public class Island {
 
     public String getName() {
         return name;
+    }
+
+    public String getStory() {
+        return story;
     }
 
     public int getAgriculturePercentage() {

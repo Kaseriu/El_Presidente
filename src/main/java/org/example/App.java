@@ -42,7 +42,9 @@ public class App {
                             }
                             else {
                                 game.launchScenario(tab[Integer.parseInt(input) - 1][1]);
-
+                                game.displayChosenScenario();
+                                System.out.println();
+                                game.gameStart();
                             }
                         }
 
