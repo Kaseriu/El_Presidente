@@ -26,6 +26,10 @@ public class Faction {
         return satisfactionPercentage;
     }
 
+    public void setSatisfactionPercentage(int satisfactionPercentage) {
+        this.satisfactionPercentage = satisfactionPercentage;
+    }
+
     @Override
     public String toString() {
         return "Faction{" +
@@ -36,7 +40,28 @@ public class Faction {
     }
 
     public void updateSatisfaction(int satisfactionPercentage){
-
-
+        if (this.satisfactionPercentage > 0){
+            this.satisfactionPercentage += satisfactionPercentage;
+            if(this.satisfactionPercentage < 0){
+                this.satisfactionPercentage = 0;
+            }
+            if(this.satisfactionPercentage > 100){
+                this.satisfactionPercentage = 100;
+            }
+        }
     }
+
+    public void updatePartisans(int numberOfPartisans){
+        this.numberOfPartisans += numberOfPartisans;
+        if(this.numberOfPartisans < 0){
+            this.numberOfPartisans = 0;
+        }
+    }
+
+    public void deletePartisans(){
+        updatePartisans(-1);
+        updateSatisfaction(-2);
+    }
+
+
 }
