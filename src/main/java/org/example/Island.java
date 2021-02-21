@@ -15,9 +15,11 @@ public class Island {
     private int foodUnits;
     private String difficulty;
     private List<Faction> factions = new ArrayList<>();
+    private List<Events> events = new ArrayList<>();
 
 
     public Island(){}
+
     public Island(String name, int agriculturePercentage, int industryPercentage, int treasury, int foodUnits, String difficulty, List<Faction> factions) {
 
         this.name = name;
@@ -57,18 +59,29 @@ public class Island {
         return factions;
     }
 
+//    @Override
+//    public String toString() {
+//        String chaine =  "Island{" +
+//                "name='" + this.name + '\'' +
+//                ", agriculture=" + this.agriculturePercentage +
+//                ", industry=" + this.industryPercentage +
+//                ", treasury=" + this.treasury +
+//                ", foodUnits=" + this.foodUnits +
+//                '}';
+//        for (Faction faction: this.factions
+//             ) {
+//            chaine += faction.toString();
+//        }
+//        return chaine;
+//    }
+
     @Override
     public String toString() {
-        String chaine =  "Island{" +
-                "name='" + name + '\'' +
-                ", agriculture=" + agriculturePercentage +
-                ", industry=" + industryPercentage +
-                ", treasury=" + treasury +
-                ", foodUnits=" + foodUnits +
-                '}';
-        for (Faction faction: factions
-             ) {
-            chaine += faction.toString();
+        String chaine = "";
+
+        for (Events event: this.events
+        ) {
+            chaine += event.toString();
         }
         return chaine;
     }
@@ -84,6 +97,7 @@ public class Island {
     public void updateFoodUnitsComparedToAgriculture(){
         this.foodUnits += this.agriculturePercentage*40;
     }
+
     public Faction getFactionByName(String name){
         Faction factiontmp = new Faction();
         for (Faction faction: this.factions) {
@@ -92,6 +106,10 @@ public class Island {
             }
         }
         return factiontmp;
+    }
+
+    public List<Events> getEvents() {
+        return events;
     }
 
     public int getTotalPartisans(){
@@ -135,6 +153,7 @@ public class Island {
             }
         }
     }
+
     public boolean defeatCondition(){
 
         int totalPartisans = getTotalPartisans();
@@ -145,6 +164,7 @@ public class Island {
         }
         return total / totalPartisans >= percentageDefeat(this.difficulty);
     }
+
     public int percentageDefeat(String difficulty){
         if(difficulty.equals("NORMAL")){
             return 25;

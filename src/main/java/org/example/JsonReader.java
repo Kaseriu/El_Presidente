@@ -13,10 +13,28 @@ public class JsonReader {
             ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 
-            // convert JSON string to Book object
-            Island island = mapper.readValue(Paths.get("C:\\Users\\Theo\\Documents\\ESGI\\COURS\\Outils et techniques de développement\\El_Presidente-main\\src\\main\\java\\org\\example\\attackOnTitans.json").toFile(), Island.class);
+            // convert JSON string to Island object
+            Island island = mapper.readValue(Paths.get("src/main/java/org/jsonFile/attackOnTitans.json").toFile(), Island.class);
 
-            // print book
+            // print Island
+            System.out.println(island.toString());
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void getEventsFromJson() {
+
+        try {
+            // create object mapper instance
+            ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+
+            // convert JSON string to Island object
+            Island island = mapper.readValue(Paths.get("src/main/java/org/jsonFile/attackOnTitans.json").toFile(), Island.class);
+
+            // print Island
             System.out.println(island.toString());
 
         } catch (Exception ex) {

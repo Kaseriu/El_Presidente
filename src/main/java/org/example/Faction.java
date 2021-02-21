@@ -7,12 +7,6 @@ public class Faction {
     private int satisfactionPercentage;
 
     public Faction(){}
-    public Faction(String name, int numberOfPartisans, int satisfactionPercentage) {
-
-        this.name = name;
-        this.numberOfPartisans = numberOfPartisans;
-        this.satisfactionPercentage = satisfactionPercentage;
-    }
 
     public String getName() {
         return name;
