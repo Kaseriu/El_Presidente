@@ -16,6 +16,7 @@ public class Game {
         this.scenarios.put("Attack On Titans", "src/main/java/org/jsonFile/attackOnTitans.json");
         this.scenarios.put("Cold War USA", "src/main/java/org/jsonFile/coldWarUSA.json");
         this.scenarios.put("Cold War USSR", "src/main/java/org/jsonFile/coldWarUSSR.json");
+        this.scenarios.put("Bac à sable", "src/main/java/org/jsonFile/sandbox.json");
     }
 
     public HashMap<String, String> getScenarios() {
@@ -28,7 +29,7 @@ public class Game {
 
     public String[][] displayScenarios() {
 
-        String[][] chaine = new String[3][3];
+        String[][] chaine = new String[4][3];
         int i = 0;
 
         for (String scenarioName : this.scenarios.keySet()) {
