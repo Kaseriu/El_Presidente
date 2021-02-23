@@ -24,10 +24,10 @@ public class Events {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public List<Choices> getChoices() {
-        return choices;
+        return this.choices;
     }
 }

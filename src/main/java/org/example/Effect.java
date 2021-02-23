@@ -6,7 +6,7 @@ public class Effect {
 
     private HashMap<String, Integer> actionOnFaction = new HashMap<String, Integer>();
     private HashMap<String, Integer> actionOnFactor = new HashMap<String, Integer>();
-    private int partisants;
+    private int partisans;
 
     public Effect() {
     }
@@ -24,22 +24,22 @@ public class Effect {
             chaine += "Faction: " + i + " Chiffre: " + this.actionOnFactor.get(i) + " ";
         }
 
-        chaine += "partisants='" + this.partisants;
+        chaine += "partisants='" + this.partisans;
 
         chaine += '}';
 
         return chaine;
     }
 
-    public HashMap getActionOnFaction() {
-        return actionOnFaction;
+    public HashMap<String, Integer> getActionOnFaction() {
+        return this.actionOnFaction;
     }
 
-    public HashMap getActionOnFactor() {
-        return actionOnFactor;
+    public HashMap<String, Integer> getActionOnFactor() {
+        return this.actionOnFactor;
     }
 
-    public int getPartisants() {
-        return partisants;
+    public int getPartisans() {
+        return this.partisans;
     }
 }

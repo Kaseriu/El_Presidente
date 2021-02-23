@@ -24,10 +24,10 @@ public class Choices {
     }
 
     public String getChoice() {
-        return choice;
+        return this.choice;
     }
 
     public List<Effect> getEffects() {
-        return effects;
+        return this.effects;
     }
 }

@@ -10,42 +10,42 @@
     {
       "name": "Capitalists",
       "satisfactionPercentage": 50,
-      "partisans": 15
+      "numberOfPartisans": 15
     },
     {
       "name": "Communists",
       "satisfactionPercentage": 50,
-      "partisans": 15
+      "numberOfPartisans": 15
     },
     {
       "name": "Liberals",
       "satisfactionPercentage": 50,
-      "partisans": 15
+      "numberOfPartisans": 15
     },
     {
       "name": "Religious",
       "satisfactionPercentage": 50,
-      "partisans": 15
+      "numberOfPartisans": 15
     },
     {
       "name": "Militarists",
       "satisfactionPercentage": 50,
-      "partisans": 15
+      "numberOfPartisans": 15
     },
     {
       "name": "Ecologists",
       "satisfactionPercentage": 50,
-      "partisans": 15
+      "numberOfPartisans": 15
     },
     {
       "name": "Loyalists",
       "satisfactionPercentage": 100,
-      "partisans": 15
+      "numberOfPartisans": 15
     },
     {
       "name": "Nationalists",
       "satisfactionPercentage": 50,
-      "partisans": 15
+      "numberOfPartisans": 15
     }
   ],
   "events": [

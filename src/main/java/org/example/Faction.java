@@ -9,15 +9,15 @@ public class Faction {
     public Faction(){}
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public int getNumberOfPartisans() {
-        return numberOfPartisans;
+        return this.numberOfPartisans;
     }
 
     public int getSatisfactionPercentage() {
-        return satisfactionPercentage;
+        return this.satisfactionPercentage;
     }
 
     public void setSatisfactionPercentage(int satisfactionPercentage) {
@@ -27,9 +27,9 @@ public class Faction {
     @Override
     public String toString() {
         return "Faction{" +
-                "name='" + name + '\'' +
-                ", numberOfPartisans=" + numberOfPartisans +
-                ", satisfactionPercentage=" + satisfactionPercentage +
+                "name='" + this.name + '\'' +
+                ", numberOfPartisans=" + this.numberOfPartisans +
+                ", satisfactionPercentage=" + this.satisfactionPercentage +
                 '}';
     }
 

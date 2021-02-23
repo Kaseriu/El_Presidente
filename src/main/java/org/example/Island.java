@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.enums.Difficulty;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,8 +19,8 @@ public class Island {
 
     public Island(){}
 
-    public Island(String name, String story, int agriculturePercentage, int industryPercentage, int treasury, int foodUnits, String difficulty, List<Faction> factions) {
-
+    public Island(String name, String story, int agriculturePercentage, int industryPercentage, int treasury,
+                  int foodUnits, String difficulty, List<Faction> factions) {
         this.name = name;
         this.story = story;
         this.agriculturePercentage = agriculturePercentage;
@@ -34,38 +32,50 @@ public class Island {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getStory() {
-        return story;
+        return this.story;
     }
 
     public int getAgriculturePercentage() {
-        return agriculturePercentage;
+        return this.agriculturePercentage;
     }
 
     public int getIndustryPercentage() {
-        return industryPercentage;
+        return this.industryPercentage;
     }
 
     public int getTreasury() {
-        return treasury;
+        return this.treasury;
     }
 
     public int getFoodUnits() {
-        return foodUnits;
+        return this.foodUnits;
     }
 
     public String getDifficulty() {
-        return difficulty;
+        return this.difficulty;
     }
 
     public List<Faction> getFactions() {
-        return factions;
+        return this.factions;
     }
 
-//    @Override
+    public void updateAgriculturePercentage(int agriculturePercentage) {
+        this.agriculturePercentage += agriculturePercentage;
+    }
+
+    public void updateIndustryPercentage(int industryPercentage) {
+        this.industryPercentage += industryPercentage;
+    }
+
+    public void updateTreasury(int treasury) {
+        this.treasury += treasury;
+    }
+
+    //    @Override
 //    public String toString() {
 //        String chaine =  "Island{" +
 //                "name='" + this.name + '\'' +
@@ -107,7 +117,7 @@ public class Island {
     public Faction getFactionByName(String name){
         Faction factiontmp = new Faction();
         for (Faction faction: this.factions) {
-            if (faction.getName() == name){
+            if (faction.getName().equals(name)){
                 factiontmp = faction;
             }
         }
@@ -149,7 +159,7 @@ public class Island {
             this.factions.get(random.nextInt(8)).deletePartisans();
         }
         this.foodUnits -= totalPartisans*4;
-        if(foodUnits > 0){
+        if(this.foodUnits > 0){
             Random random = new Random();
             int randomPercentage = random.nextInt(10)+1;
             int newPartisans = 100*randomPercentage/totalPartisans;

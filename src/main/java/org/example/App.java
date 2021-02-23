@@ -7,14 +7,14 @@ public class App {
     public static void main( String[] args ) {
 
         boolean stop = false;
-        boolean back = false;
+        boolean back;
         Game game = new Game();
 
-        System.out.println("EL PRESIDENTE!");
         Scanner scanner = new Scanner(System.in);
 
         while (!stop) {
 
+            System.out.println("EL PRESIDENTE!");
             System.out.println("Appuyer sur entrée pour continuer ou taper stop pour quitter");
             String input = scanner.nextLine();
 
@@ -32,11 +32,18 @@ public class App {
                         System.out.println(formattedString(tab));
                         scanner.reset();
                         input = scanner.nextLine();
-                        if (input.equals("back")) {
-                            back = true;
+
+                        if (!isStringInteger(input, 10)) {
+                            if (input.equals("back")) {
+                                back = true;
+                            }
+                            else {
+                                System.out.println("Taper un chiffre");
+                            }
+
                         }
                         else {
-                            if (Integer.parseInt(input) > 3) {
+                            if (Integer.parseInt(input) > 4 || Integer.parseInt(input) <= 0) {
 
                                 System.out.println("Numéro de scénario invalide");
                             }
@@ -64,5 +71,26 @@ public class App {
                 .replace("[", "")  //remove the right bracket
                 .replace("]", "")  //remove the left bracket
                 .trim();
+    }
+
+    public static boolean isStringInteger(String stringToCheck, int radix) {
+
+        if(stringToCheck.isEmpty()) {
+            return false;           //Check if the string is empty
+        }
+        for (int i = 0; i < stringToCheck.length(); i++) {
+            if (i == 0 && stringToCheck.charAt(i) == '-') {     //Check for negative Integers
+                if (stringToCheck.length() == 1) {
+                    return false;
+                }
+                else {
+                    continue;
+                }
+            }
+            if (Character.digit(stringToCheck.charAt(i),radix) < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

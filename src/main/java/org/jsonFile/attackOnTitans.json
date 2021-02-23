@@ -100,7 +100,7 @@
               }
             },
             {
-              "partisans": -1000
+              "numberOfPartisans": -1000
             }
           ],
           "relatedEvents": [
