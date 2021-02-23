@@ -1,6 +1,5 @@
 package org.example;
 
-import java.io.File;
 import java.util.*;
 
 public class Game {
@@ -11,7 +10,7 @@ public class Game {
 
     public Game() {
 
-        this.seasons = 4;
+        this.seasons = 1;
         this.scenarios.put("Attack On Titans", "src/main/java/org/jsonFile/attackOnTitans.json");
         this.scenarios.put("Cold War USA", "src/main/java/org/jsonFile/coldWarUSA.json");
         this.scenarios.put("Cold War USSR", "src/main/java/org/jsonFile/coldWarUSSR.json");
