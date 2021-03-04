@@ -124,7 +124,7 @@ public class Game {
 
                             exitCondition = false;
                             factions = this.island.getFactions();
-                            System.out.println("Choisissez la faction à soudoyer");
+                            System.out.println("Choisissez la faction à soudoyer (+10% de satisfaction, baisse la satisfaction des Loyalists)");
 
                             while (!exitCondition) {
 
@@ -132,19 +132,23 @@ public class Game {
                                 i = 1;
                                 for (Faction faction: factions) {
 
-                                    System.out.println(i + " - " + faction.getName() + " - " + faction.getNumberOfPartisans()*15 + "$");
-                                    i++;
+                                    if (!faction.getName().equals("Loyalists")) {
+                                        System.out.println(i + " - " + faction.getName() + " - Satisfaction : "
+                                                + faction.getSatisfactionPercentage() + " - Cout : "
+                                                + faction.getNumberOfPartisans()*15 + "$");
+                                        i++;
+                                    }
                                 }
                                 System.out.println(i + " - " + "Retour");
 
                                 input = scanner.nextLine();
 
-                                if (App.isStringInteger(input, 10) && Integer.parseInt(input) < factions.size()
+                                if (App.isStringInteger(input, 10) && Integer.parseInt(input) < factions.size() - 1
                                         && Integer.parseInt(input) > 0) {
                                     this.island.bribe(factions.get(Integer.parseInt(input) - 1));
                                     exitCondition = true;
                                 }
-                                if (App.isStringInteger(input, 10) && Integer.parseInt(input) > factions.size()
+                                if (App.isStringInteger(input, 10) && Integer.parseInt(input) > factions.size() - 1
                                         && Integer.parseInt(input) > 0 && Integer.parseInt(input) == i) {
 
                                     exitCondition = true;
@@ -163,8 +167,12 @@ public class Game {
 
                             while (!exitCondition) {
 
-                                System.out.println("Choissisez la quantité de nourriture à acheter (8$ par unité)");
-                                System.out.println("Fonds disponible : " + island.getTreasury() + "$");
+                                System.out.println("Choisissez la quantité de nourriture à acheter (8$ par unité)");
+                                System.out.println("Fonds disponible : " + this.island.getTreasury() + "$");
+                                System.out.println("Nourriture disponible : " + this.island.getFoodUnits() + " unités");
+                                System.out.println("Population totale : " + this.island.getTotalPartisans() + " partisans");
+                                System.out.println("Nourriture nécessaire pour nourrir toute votre population : "
+                                        + this.island.getTotalPartisans() / 4 + " unités");
                                 System.out.println("Taper 0 pour retourner au menu précédent");
                                 input = scanner.nextLine();
 
@@ -187,13 +195,15 @@ public class Game {
                         }
                     }
 
+                    this.island.endOfYearResult();
+                    this.island.updateFoodUnitsComparedToAgriculture();
+                    this.island.updateTreasuryComparedToIndustry();
                     this.seasons = 1;
-                    i = 1;
                 }
                 else {
                     this.seasons++;
-                    i = 1;
                 }
+                i = 1;
             }
 
         }
@@ -242,10 +252,14 @@ public class Game {
                 switch (i) {
 
                     case "AGRICULTURE":
-                        island.updateAgriculturePercentage(actionOnFactor.get(i));
+                        if (island.cumulation(actionOnFactor.get(i), 0)) {
+                            island.updateAgriculturePercentage(actionOnFactor.get(i));
+                        }
                         break;
                     case "INDUSTRY":
-                        island.updateIndustryPercentage(actionOnFactor.get(i));
+                        if (island.cumulation(0, actionOnFactor.get(i))) {
+                            island.updateIndustryPercentage(actionOnFactor.get(i));
+                        }
                         break;
                     case "TREASURY":
                         island.updateTreasury(actionOnFactor.get(i));

@@ -107,7 +107,7 @@ public class Island {
     }
 
     public boolean cumulation(int agriculturePercentage, int industryPercentage){
-        return this.agriculturePercentage + agriculturePercentage + this.agriculturePercentage + industryPercentage <= 100;
+        return this.agriculturePercentage + agriculturePercentage + this.industryPercentage + industryPercentage <= 100;
     }
 
     public void updateTreasuryComparedToIndustry(){
