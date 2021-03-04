@@ -73,6 +73,10 @@ public class Island {
 
     public void updateTreasury(int treasury) {
         this.treasury += treasury;
+
+        if (this.treasury < 0) {
+            this.treasury = 0;
+        }
     }
 
     //    @Override
@@ -137,8 +141,11 @@ public class Island {
     }
 
     public void bribe(Faction faction){
-        if(!faction.getName().equals("Loyalists")){
-            this.treasury -= faction.getNumberOfPartisans()*15;
+        if (this.treasury == 0 || this.treasury < faction.getNumberOfPartisans()*15) {
+            System.out.println("Vous n'avez pas les fonds !");
+        }
+        else if(!faction.getName().equals("Loyalists")){
+            updateTreasury(-faction.getNumberOfPartisans()*15);
             Faction loyalist = getFactionByName("Loyalists");
             loyalist.updateSatisfaction(-(faction.getNumberOfPartisans()*15)/10);
             faction.setSatisfactionPercentage(faction.getSatisfactionPercentage() + 10);
@@ -146,9 +153,15 @@ public class Island {
     }
 
     public void buyFoodUnits(int quantity){
-        if(!(this.treasury < quantity*8)){
+        if(quantity <= 0) {
+            System.out.println("Valeur incorrect");
+        }
+        else if(!(this.treasury < quantity*8)){
             this.treasury -= quantity*8;
             this.foodUnits += quantity;
+        }
+        else {
+            System.out.println("Vous n'avez pas les fonds suffisant !");
         }
     }
 

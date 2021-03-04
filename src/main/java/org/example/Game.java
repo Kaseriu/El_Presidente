@@ -55,79 +55,147 @@ public class Game {
     public void gameStart() {
 
         Scanner scanner = new Scanner(System.in);
-        String input = "0";
+        String input;
         Events event;
         Choices selectedChoice;
         List<Choices> choices;
         List<Faction> factions;
         int i = 1;
+        boolean endGame = false;
+        boolean validChoice;
+        boolean exitCondition;
 
-        System.out.println("Saison " + this.seasons);
-        event = getRandomEvent();
-        System.out.println(event.getName());
-        choices = event.getChoices();
 
-        while (Integer.parseInt(input) > choices.size() || Integer.parseInt(input) <= 0) {
-            for (Choices choice: choices) {
+        while (!endGame) {
 
-                System.out.println(i + " - " + choice.getChoice());
-                i++;
-            }
+            event = getRandomEvent();
+            choices = event.getChoices();
+            input = "0";
 
-            input = scanner.nextLine();
+            while (Integer.parseInt(input) > choices.size() || Integer.parseInt(input) <= 0) {
 
-            if (!App.isStringInteger(input, 10)) {
-                    System.out.println("Taper un chiffre");
-                    input = "0";
-            }
-            else if(Integer.parseInt(input) > choices.size() || Integer.parseInt(input) <= 0){
-                System.out.println("Entrez un choix valide !");
-                i = 1;
-            }
-            else {
-                selectedChoice = choices.get(Integer.parseInt(input) - 1);
-                updateFromChoice(this.island, selectedChoice.getEffects());
-                island.defeatCondition();
-            }
+                System.out.println("Saison " + this.seasons);
+                System.out.println(event.getName());
+                validChoice = false;
 
-            if (seasons >= 4) {
+                while (!validChoice) {
 
-                while (!input.equals("3")) {
+                    for (Choices choice: choices) {
 
-                    System.out.println("Fin d'année choisissez un évènement");
-                    System.out.println("1 - Pot de vin");
-                    System.out.println("2 - Marché alimentaire");
-                    System.out.println("3 - Continuer");
+                        System.out.println(i + " - " + choice.getChoice());
+                        i++;
+                    }
 
                     input = scanner.nextLine();
 
-                    if (input.equals("1")) {
-
+                    if (!App.isStringInteger(input, 10)) {
+                        System.out.println("Taper un chiffre");
                         i = 1;
-                        System.out.println("Choisissez la faction à soudoyer");
-                        factions = island.getFactions();
-                        for (Faction faction: factions) {
-
-                            System.out.println(i + " - " + faction.getName());
-                            i++;
-                        }
-                        input = scanner.nextLine();
-                        island.bribe(factions.get(Integer.parseInt(input) - 1));
                     }
+                    else if(Integer.parseInt(input) > choices.size() || Integer.parseInt(input) <= 0){
+                        System.out.println("Entrez un choix valide !");
+                        i = 1;
+                    }
+                    else {
+                        selectedChoice = choices.get(Integer.parseInt(input) - 1);
+                        updateFromChoice(this.island, selectedChoice.getEffects());
 
-                    if (input.equals("2")) {
+                        if (!this.island.defeatCondition()) {
 
-                        System.out.println("Choissisez la quantité de nourriture à acheter (8$ par unité)");
-                        input = scanner.nextLine();
-                        island.buyFoodUnits(Integer.parseInt(input));
+                            endGame = true;
+                        }
+
+                        validChoice = true;
                     }
                 }
 
-                seasons = 1;
+                if (this.seasons >= 4 && !endGame) {
+
+                    while (!input.equals("3")) {
+
+                        System.out.println("Fin d'année choisissez un évènement");
+                        System.out.println("1 - Pot de vin");
+                        System.out.println("2 - Marché alimentaire");
+                        System.out.println("3 - Continuer");
+
+                        input = scanner.nextLine();
+
+                        if (input.equals("1")) {
+
+                            exitCondition = false;
+                            factions = this.island.getFactions();
+                            System.out.println("Choisissez la faction à soudoyer");
+
+                            while (!exitCondition) {
+
+                                System.out.println("Fonds disponible : " + island.getTreasury() + "$");
+                                i = 1;
+                                for (Faction faction: factions) {
+
+                                    System.out.println(i + " - " + faction.getName() + " - " + faction.getNumberOfPartisans()*15 + "$");
+                                    i++;
+                                }
+                                System.out.println(i + " - " + "Retour");
+
+                                input = scanner.nextLine();
+
+                                if (App.isStringInteger(input, 10) && Integer.parseInt(input) < factions.size()
+                                        && Integer.parseInt(input) > 0) {
+                                    this.island.bribe(factions.get(Integer.parseInt(input) - 1));
+                                    exitCondition = true;
+                                }
+                                if (App.isStringInteger(input, 10) && Integer.parseInt(input) > factions.size()
+                                        && Integer.parseInt(input) > 0 && Integer.parseInt(input) == i) {
+
+                                    exitCondition = true;
+                                }
+                                else {
+
+                                    System.out.println("Choisissez un numéro de faction valable");
+                                }
+                            }
+                        }
+
+                        if (input.equals("2")) {
+
+                            exitCondition = false;
+                            int funds = island.getTreasury();
+
+                            while (!exitCondition) {
+
+                                System.out.println("Choissisez la quantité de nourriture à acheter (8$ par unité)");
+                                System.out.println("Fonds disponible : " + island.getTreasury() + "$");
+                                System.out.println("Taper 0 pour retourner au menu précédent");
+                                input = scanner.nextLine();
+
+                                if (App.isStringInteger(input, 10) && Integer.parseInt(input) > 0) {
+
+                                    this.island.buyFoodUnits(Integer.parseInt(input));
+
+                                    if (funds != this.island.getTreasury()) {
+                                        exitCondition = true;
+                                    }
+                                }
+                                else if (App.isStringInteger(input, 10) && Integer.parseInt(input) == 0) {
+                                    exitCondition = true;
+                                }
+                                else {
+
+                                    System.out.println("Entrez une valeur");
+                                }
+                            }
+                        }
+                    }
+
+                    this.seasons = 1;
+                    i = 1;
+                }
+                else {
+                    this.seasons++;
+                    i = 1;
+                }
             }
-            else {
-                seasons++;
-            }
+
         }
     }
 
