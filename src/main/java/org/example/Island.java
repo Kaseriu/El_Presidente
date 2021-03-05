@@ -65,10 +65,16 @@ public class Island {
 
     public void updateAgriculturePercentage(int agriculturePercentage) {
         this.agriculturePercentage += agriculturePercentage;
+        if (this.agriculturePercentage <= 0) {
+            this.agriculturePercentage = 0;
+        }
     }
 
     public void updateIndustryPercentage(int industryPercentage) {
         this.industryPercentage += industryPercentage;
+        if (this.industryPercentage <= 0) {
+            this.industryPercentage = 0;
+        }
     }
 
     public void updateTreasury(int treasury) {
@@ -95,15 +101,31 @@ public class Island {
 //        return chaine;
 //    }
 
-    @Override
-    public String toString() {
-        String chaine = "";
+//    @Override
+//    public String toString() {
+//        String chaine = "";
+//
+//        for (Events event: this.events
+//        ) {
+//            chaine += event.toString();
+//        }
+//        return chaine;
+//    }
 
-        for (Events event: this.events
-        ) {
-            chaine += event.toString();
+    public String displayIslandInformations() {
+        String string = "";
+
+        string += "Agriculture : " + this.agriculturePercentage + "%\n";
+        string += "Industrie : " + this.industryPercentage + "%\n";
+        string += "Trésorerie : " + this.treasury + "$\n";
+        string += "Nourriture : " + this.foodUnits + " unités\n";
+
+        for (Faction faction: this.factions
+             ) {
+            string += faction.toString();
         }
-        return chaine;
+
+        return string;
     }
 
     public boolean cumulation(int agriculturePercentage, int industryPercentage){

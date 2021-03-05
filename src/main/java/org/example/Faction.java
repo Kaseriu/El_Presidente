@@ -26,11 +26,10 @@ public class Faction {
 
     @Override
     public String toString() {
-        return "Faction{" +
-                "name='" + this.name + '\'' +
-                ", numberOfPartisans=" + this.numberOfPartisans +
-                ", satisfactionPercentage=" + this.satisfactionPercentage +
-                '}';
+        return this.name + " - " +
+                this.numberOfPartisans + " partisans - " +
+                "Satisfaction : " + this.satisfactionPercentage +
+                "%\n";
     }
 
     public void updateSatisfaction(int satisfactionPercentage){

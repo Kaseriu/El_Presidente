@@ -57,6 +57,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         String input;
         Events event;
+        Events previousEvent = null;
         Choices selectedChoice;
         List<Choices> choices;
         List<Faction> factions;
@@ -69,6 +70,10 @@ public class Game {
         while (!endGame) {
 
             event = getRandomEvent();
+            if (event == previousEvent && previousEvent != null) {
+                event = getRandomEvent();
+            }
+
             choices = event.getChoices();
             input = "0";
 
@@ -103,8 +108,10 @@ public class Game {
                         if (!this.island.defeatCondition()) {
 
                             endGame = true;
+                            System.out.println("Vous avez moins de 50% de satisfaction générale, vous êtes renversé par un coup d'État !");
                         }
 
+                        System.out.println(this.island.displayIslandInformations());
                         validChoice = true;
                     }
                 }
@@ -134,7 +141,7 @@ public class Game {
 
                                     if (!faction.getName().equals("Loyalists")) {
                                         System.out.println(i + " - " + faction.getName() + " - Satisfaction : "
-                                                + faction.getSatisfactionPercentage() + " - Cout : "
+                                                + faction.getSatisfactionPercentage() + "% - Cout : "
                                                 + faction.getNumberOfPartisans()*15 + "$");
                                         i++;
                                     }
@@ -146,6 +153,7 @@ public class Game {
                                 if (App.isStringInteger(input, 10) && Integer.parseInt(input) < factions.size() - 1
                                         && Integer.parseInt(input) > 0) {
                                     this.island.bribe(factions.get(Integer.parseInt(input) - 1));
+                                    System.out.println(this.island.displayIslandInformations());
                                     exitCondition = true;
                                 }
                                 if (App.isStringInteger(input, 10) && Integer.parseInt(input) > factions.size() - 1
@@ -179,6 +187,7 @@ public class Game {
                                 if (App.isStringInteger(input, 10) && Integer.parseInt(input) > 0) {
 
                                     this.island.buyFoodUnits(Integer.parseInt(input));
+                                    System.out.println(this.island.displayIslandInformations());
 
                                     if (funds != this.island.getTreasury()) {
                                         exitCondition = true;
@@ -206,7 +215,9 @@ public class Game {
                 i = 1;
             }
 
+            previousEvent = event;            
         }
+        this.seasons = 1;
     }
 
     public Events getRandomEvent() {
