@@ -73,13 +73,17 @@ public class Game {
             if (event == previousEvent && previousEvent != null) {
                 event = getRandomEvent();
             }
+            if (event.getSeasons() != 0 && event.getSeasons() != this.seasons) {
+                event = getRandomEvent();
+            }
+
 
             choices = event.getChoices();
             input = "0";
 
             while (Integer.parseInt(input) > choices.size() || Integer.parseInt(input) <= 0) {
 
-                System.out.println("Saison " + this.seasons);
+                displaySeason();
                 System.out.println(event.getName());
                 validChoice = false;
 
@@ -218,6 +222,25 @@ public class Game {
             previousEvent = event;            
         }
         this.seasons = 1;
+    }
+
+    public void displaySeason() {
+
+        switch (this.seasons) {
+
+            case 1 :
+                System.out.println("Eté");
+                break;
+            case 2 :
+                System.out.println("Automne");
+                break;
+            case 3:
+                System.out.println("Hiver");
+                break;
+            case 4:
+                System.out.println("Printemps");
+                break;
+        }
     }
 
     public Events getRandomEvent() {

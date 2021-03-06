@@ -51,6 +51,7 @@
   "events": [
     {
       "name": "La montée en puissance des capitalistes dans votre pays se fait de plus en plus proche.",
+      "seasons" : 0,
       "choices": [
         {
           "choice": "Je mets en place une doctrine : le containment pour les contenir",
@@ -80,6 +81,7 @@
     },
     {
       "name": "La montée en puissance des communistes dans votre pays se fait de plus en plus proche.",
+      "seasons" : 0,
       "choices": [
         {
           "choice": "Je mets en place une doctrine : le containment pour les contenir",
@@ -109,6 +111,7 @@
     },
     {
       "name": "Des pays vous proposent une alliance militaire",
+      "seasons" : 0,
       "choices": [
         {
           "choice": "J'accepte afin d'agrandir mes capacités de riposte",
@@ -183,7 +186,7 @@
     },
     {
       "name": "Une tempête de neige s'abat sur votre pays ! Que faites-vous ?",
-      "seasons": "3",
+      "seasons": 3,
       "choices": [
         {
           "choice": "J'envoie l'armé distribuer de la nourriture à la population",
@@ -225,7 +228,7 @@
     },
     {
       "name": "Une canicule s'abat sur votre pays ! Que faites-vous ?",
-      "seasons": "1",
+      "seasons": 1,
       "choices": [
         {
           "choice": "J'aide financièrement les agriculteurs",
@@ -265,7 +268,7 @@
     },
     {
       "name": "L’Organisation des Caraïbes-Unies souhaite que vous accueillez des réfugiés climatiques suites aux récentes inondations dans la région",
-      "seasons": "2",
+      "seasons": 2,
       "choices": [
         {
           "choice": "Décliner poliment au motif que vous n’avez pas les infrastructures pour eux",
@@ -321,6 +324,7 @@
     },
     {
       "name": "Vous avez découvert un gisement d’or ! Que faire ?",
+      "seasons" : 0,
       "choices": [
         {
           "choice": "Utilisons-le pour améliorer le bien-être des citoyens !",
@@ -375,6 +379,7 @@
     },
     {
       "name": "Un ouragan va frapper l’île ! Sauvons El Presidente !",
+      "seasons" : 0,
       "choices": [
         {
           "choice": "Se mettre à l’abri",

@@ -6,6 +6,7 @@ import java.util.List;
 public class Events {
 
     private String name;
+    private int seasons;
     private List<Choices> choices = new ArrayList<Choices>();
 
     public Events() {
@@ -25,6 +26,10 @@ public class Events {
 
     public String getName() {
         return this.name;
+    }
+
+    public int getSeasons() {
+        return seasons;
     }
 
     public List<Choices> getChoices() {
