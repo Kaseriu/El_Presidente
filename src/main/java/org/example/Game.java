@@ -70,8 +70,10 @@ public class Game {
         while (!endGame) {
 
             event = getRandomEvent();
-            if (event == previousEvent && previousEvent != null) {
-                event = getRandomEvent();
+            if (previousEvent != null) {
+                while (event == previousEvent) {
+                    event = getRandomEvent();
+                }
             }
             if (event.getSeasons() != 0 && event.getSeasons() != this.seasons) {
                 event = getRandomEvent();
@@ -119,104 +121,104 @@ public class Game {
                         validChoice = true;
                     }
                 }
+                i = 1;
+            }
 
-                if (this.seasons >= 4 && !endGame) {
+            if (this.seasons >= 4 && !endGame) {
 
-                    while (!input.equals("3")) {
+                while (!input.equals("3")) {
 
-                        System.out.println("Fin d'année choisissez un évènement");
-                        System.out.println("1 - Pot de vin");
-                        System.out.println("2 - Marché alimentaire");
-                        System.out.println("3 - Continuer");
+                    System.out.println("Fin d'année choisissez un évènement");
+                    System.out.println("1 - Pot de vin");
+                    System.out.println("2 - Marché alimentaire");
+                    System.out.println("3 - Continuer");
 
-                        input = scanner.nextLine();
+                    input = scanner.nextLine();
 
-                        if (input.equals("1")) {
+                    if (input.equals("1")) {
 
-                            exitCondition = false;
-                            factions = this.island.getFactions();
-                            System.out.println("Choisissez la faction à soudoyer (+10% de satisfaction, baisse la satisfaction des Loyalists)");
+                        exitCondition = false;
+                        factions = this.island.getFactions();
+                        System.out.println("Choisissez la faction à soudoyer (+10% de satisfaction, baisse la satisfaction des Loyalists)");
 
-                            while (!exitCondition) {
+                        while (!exitCondition) {
 
-                                System.out.println("Fonds disponible : " + island.getTreasury() + "$");
-                                i = 1;
-                                for (Faction faction: factions) {
+                            System.out.println("Fonds disponible : " + island.getTreasury() + "$");
+                            i = 1;
+                            for (Faction faction: factions) {
 
-                                    if (!faction.getName().equals("Loyalists")) {
-                                        System.out.println(i + " - " + faction.getName() + " - Satisfaction : "
-                                                + faction.getSatisfactionPercentage() + "% - Cout : "
-                                                + faction.getNumberOfPartisans()*15 + "$");
-                                        i++;
-                                    }
-                                }
-                                System.out.println(i + " - " + "Retour");
-
-                                input = scanner.nextLine();
-
-                                if (App.isStringInteger(input, 10) && Integer.parseInt(input) < factions.size() - 1
-                                        && Integer.parseInt(input) > 0) {
-                                    this.island.bribe(factions.get(Integer.parseInt(input) - 1));
-                                    System.out.println(this.island.displayIslandInformations());
-                                    exitCondition = true;
-                                }
-                                if (App.isStringInteger(input, 10) && Integer.parseInt(input) > factions.size() - 1
-                                        && Integer.parseInt(input) > 0 && Integer.parseInt(input) == i) {
-
-                                    exitCondition = true;
-                                }
-                                else {
-
-                                    System.out.println("Choisissez un numéro de faction valable");
+                                if (!faction.getName().equals("Loyalists")) {
+                                    System.out.println(i + " - " + faction.getName() + " - Satisfaction : "
+                                            + faction.getSatisfactionPercentage() + "% - Cout : "
+                                            + faction.getNumberOfPartisans()*15 + "$");
+                                    i++;
                                 }
                             }
-                        }
+                            System.out.println(i + " - " + "Retour");
 
-                        if (input.equals("2")) {
+                            input = scanner.nextLine();
 
-                            exitCondition = false;
-                            int funds = island.getTreasury();
+                            if (App.isStringInteger(input, 10) && Integer.parseInt(input) < factions.size() - 1
+                                    && Integer.parseInt(input) > 0) {
+                                this.island.bribe(factions.get(Integer.parseInt(input) - 1));
+                                System.out.println(this.island.displayIslandInformations());
+                                exitCondition = true;
+                            }
+                            if (App.isStringInteger(input, 10) && Integer.parseInt(input) > factions.size() - 1
+                                    && Integer.parseInt(input) > 0 && Integer.parseInt(input) == i) {
 
-                            while (!exitCondition) {
+                                exitCondition = true;
+                            }
+                            else {
 
-                                System.out.println("Choisissez la quantité de nourriture à acheter (8$ par unité)");
-                                System.out.println("Fonds disponible : " + this.island.getTreasury() + "$");
-                                System.out.println("Nourriture disponible : " + this.island.getFoodUnits() + " unités");
-                                System.out.println("Population totale : " + this.island.getTotalPartisans() + " partisans");
-                                System.out.println("Nourriture nécessaire pour nourrir toute votre population : "
-                                        + this.island.getTotalPartisans() / 4 + " unités");
-                                System.out.println("Taper 0 pour retourner au menu précédent");
-                                input = scanner.nextLine();
-
-                                if (App.isStringInteger(input, 10) && Integer.parseInt(input) > 0) {
-
-                                    this.island.buyFoodUnits(Integer.parseInt(input));
-                                    System.out.println(this.island.displayIslandInformations());
-
-                                    if (funds != this.island.getTreasury()) {
-                                        exitCondition = true;
-                                    }
-                                }
-                                else if (App.isStringInteger(input, 10) && Integer.parseInt(input) == 0) {
-                                    exitCondition = true;
-                                }
-                                else {
-
-                                    System.out.println("Entrez une valeur");
-                                }
+                                System.out.println("Choisissez un numéro de faction valable");
                             }
                         }
                     }
 
-                    this.island.endOfYearResult();
-                    this.island.updateFoodUnitsComparedToAgriculture();
-                    this.island.updateTreasuryComparedToIndustry();
-                    this.seasons = 1;
+                    if (input.equals("2")) {
+
+                        exitCondition = false;
+                        int funds = island.getTreasury();
+
+                        while (!exitCondition) {
+
+                            System.out.println("Choisissez la quantité de nourriture à acheter (8$ par unité)");
+                            System.out.println("Fonds disponible : " + this.island.getTreasury() + "$");
+                            System.out.println("Nourriture disponible : " + this.island.getFoodUnits() + " unités");
+                            System.out.println("Population totale : " + this.island.getTotalPartisans() + " partisans");
+                            System.out.println("Nourriture nécessaire pour nourrir toute votre population : "
+                                    + this.island.getTotalPartisans() / 4 + " unités");
+                            System.out.println("Taper 0 pour retourner au menu précédent");
+                            input = scanner.nextLine();
+
+                            if (App.isStringInteger(input, 10) && Integer.parseInt(input) > 0) {
+
+                                this.island.buyFoodUnits(Integer.parseInt(input));
+                                System.out.println(this.island.displayIslandInformations());
+
+                                if (funds != this.island.getTreasury()) {
+                                    exitCondition = true;
+                                }
+                            }
+                            else if (App.isStringInteger(input, 10) && Integer.parseInt(input) == 0) {
+                                exitCondition = true;
+                            }
+                            else {
+
+                                System.out.println("Entrez une valeur");
+                            }
+                        }
+                    }
                 }
-                else {
-                    this.seasons++;
-                }
-                i = 1;
+
+                this.island.endOfYearResult();
+                this.island.updateFoodUnitsComparedToAgriculture();
+                this.island.updateTreasuryComparedToIndustry();
+                this.seasons = 1;
+            }
+            else {
+                this.seasons++;
             }
 
             previousEvent = event;            
