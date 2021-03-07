@@ -11,10 +11,11 @@ public class Game {
     public Game() {
 
         this.seasons = 1;
-        this.scenarios.put("Attack On Titans", "src/main/java/org/jsonFile/attackOnTitans.json");
-        this.scenarios.put("Cold War USA", "src/main/java/org/jsonFile/coldWarUSA.json");
-        this.scenarios.put("Cold War USSR", "src/main/java/org/jsonFile/coldWarUSSR.json");
-        this.scenarios.put("Bac à sable", "src/main/java/org/jsonFile/sandbox.json");
+        this.scenarios.put("Attack On Titans", "json/attackOnTitans.json");
+        this.scenarios.put("Cold War USA", "json/coldWarUSA.json");
+        this.scenarios.put("Cold War USSR", "json/coldWarUSSR.json");
+        this.scenarios.put("Bac à sable", "json/sandbox.json");
+
     }
 
     public HashMap<String, String> getScenarios() {
