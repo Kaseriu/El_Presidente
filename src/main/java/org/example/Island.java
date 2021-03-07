@@ -34,8 +34,20 @@ public class Island {
         return this.foodUnits;
     }
 
-    public String getDifficulty() {
-        return this.difficulty;
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public double getDifficulty() {
+
+        if (this.difficulty.equals("1")) {
+            return 0.5;
+        }
+        if (this.difficulty.equals("3")) {
+            return 2;
+        }
+
+        return 1;
     }
 
     public List<Faction> getFactions() {

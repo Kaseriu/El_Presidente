@@ -18,6 +18,10 @@ public class Game {
 
     }
 
+    public Island getIsland() {
+        return island;
+    }
+
     public String[][] displayScenarios() {
 
         String[][] chaine = new String[4][3];
@@ -251,7 +255,7 @@ public class Game {
                 actionOnFaction = effect.getActionOnFaction();
                 for (String i : actionOnFaction.keySet()) {
                     if (i.toLowerCase().equals(faction.getName().toLowerCase())) {
-                        faction.updateSatisfaction(actionOnFaction.get(i));
+                        faction.updateSatisfaction((int) (actionOnFaction.get(i) * this.island.getDifficulty()));
                     }
                 }
             }
@@ -269,16 +273,16 @@ public class Game {
 
                     case "AGRICULTURE":
                         if (island.cumulation(actionOnFactor.get(i), 0)) {
-                            island.updateAgriculturePercentage(actionOnFactor.get(i));
+                            island.updateAgriculturePercentage((int) (actionOnFactor.get(i) * this.island.getDifficulty()));
                         }
                         break;
                     case "INDUSTRY":
                         if (island.cumulation(0, actionOnFactor.get(i))) {
-                            island.updateIndustryPercentage(actionOnFactor.get(i));
+                            island.updateIndustryPercentage((int) (actionOnFactor.get(i) * this.island.getDifficulty()));
                         }
                         break;
                     case "TREASURY":
-                        island.updateTreasury(actionOnFactor.get(i));
+                        island.updateTreasury((int) (actionOnFactor.get(i) * this.island.getDifficulty()));
                         break;
                 }
             }
@@ -286,8 +290,9 @@ public class Game {
     }
     public void updatePartisansFromChoice(List<Faction> factions, List<Effect> effects){
         int partisans;
+
         for (Effect effect: effects) {
-            partisans = effect.getPartisans();
+            partisans = (int) (effect.getPartisans() * this.island.getDifficulty());
             Random random = new Random();
 
             while (partisans != 0){

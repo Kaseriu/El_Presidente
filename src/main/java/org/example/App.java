@@ -46,6 +46,24 @@ public class App {
                             }
                             else {
                                 game.launchScenario(tab[Integer.parseInt(input) - 1][1]);
+
+                                System.out.println("Choisissez la difficulté");
+                                System.out.println("1 - Facile");
+                                System.out.println("2 - Normal");
+                                System.out.println("3 - Difficile");
+
+                                input = scanner.nextLine();
+
+                                if (!App.isStringInteger(input, 10)) {
+                                    System.out.println("Taper un chiffre");
+                                }
+                                else if(Integer.parseInt(input) > 3 || Integer.parseInt(input) <= 0){
+                                    System.out.println("Entrez un choix valide !");
+                                }
+                                else {
+                                    game.getIsland().setDifficulty(input);
+                                }
+
                                 game.displayChosenScenario();
                                 System.out.println();
                                 game.gameStart();
