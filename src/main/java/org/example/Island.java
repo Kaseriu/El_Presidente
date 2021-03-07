@@ -190,7 +190,7 @@ public class Island {
         return 50;
     }
 
-    public void displayFactionsForBribe(){
+    public int displayFactionsForBribe(){
         int i = 1;
         for (Faction faction: this.factions) {
 
@@ -199,8 +199,10 @@ public class Island {
                         + faction.getSatisfactionPercentage() + "% - Cout : "
                         + faction.getNumberOfPartisans()*15 + "$");;
             }
+            i++;
         }
         System.out.println(i + " - " + "Retour");
-    }
 
+        return i;
+    }
 }

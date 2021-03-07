@@ -129,7 +129,7 @@ public class Game {
                         while (!exitCondition) {
 
                             System.out.println("Fonds disponible : " + island.getTreasury() + "$");
-                            this.island.displayFactionsForBribe();
+                            i = this.island.displayFactionsForBribe();
 
                             input = scanner.nextLine();
 
