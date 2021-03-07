@@ -16,20 +16,7 @@ public class Island {
     private List<Faction> factions = new ArrayList<>();
     private List<Events> events = new ArrayList<>();
 
-
     public Island(){}
-
-    public Island(String name, String story, int agriculturePercentage, int industryPercentage, int treasury,
-                  int foodUnits, String difficulty, List<Faction> factions) {
-        this.name = name;
-        this.story = story;
-        this.agriculturePercentage = agriculturePercentage;
-        this.industryPercentage = industryPercentage;
-        this.treasury = treasury;
-        this.foodUnits = foodUnits;
-        this.difficulty = difficulty;
-        this.factions = factions;
-    }
 
     public String getName() {
         return this.name;
@@ -37,14 +24,6 @@ public class Island {
 
     public String getStory() {
         return this.story;
-    }
-
-    public int getAgriculturePercentage() {
-        return this.agriculturePercentage;
-    }
-
-    public int getIndustryPercentage() {
-        return this.industryPercentage;
     }
 
     public int getTreasury() {
@@ -84,33 +63,6 @@ public class Island {
             this.treasury = 0;
         }
     }
-
-    //    @Override
-//    public String toString() {
-//        String chaine =  "Island{" +
-//                "name='" + this.name + '\'' +
-//                ", agriculture=" + this.agriculturePercentage +
-//                ", industry=" + this.industryPercentage +
-//                ", treasury=" + this.treasury +
-//                ", foodUnits=" + this.foodUnits +
-//                '}';
-//        for (Faction faction: this.factions
-//             ) {
-//            chaine += faction.toString();
-//        }
-//        return chaine;
-//    }
-
-//    @Override
-//    public String toString() {
-//        String chaine = "";
-//
-//        for (Events event: this.events
-//        ) {
-//            chaine += event.toString();
-//        }
-//        return chaine;
-//    }
 
     public String displayIslandInformations() {
         String string = "";
@@ -226,5 +178,17 @@ public class Island {
         return 50;
     }
 
+    public void displayFactionsForBribe(){
+        int i = 1;
+        for (Faction faction: this.factions) {
+
+            if (!faction.getName().equals("Loyalists")) {
+                System.out.println(i + " - " + faction.getName() + " - Satisfaction : "
+                        + faction.getSatisfactionPercentage() + "% - Cout : "
+                        + faction.getNumberOfPartisans()*15 + "$");;
+            }
+        }
+        System.out.println(i + " - " + "Retour");
+    }
 
 }

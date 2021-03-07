@@ -3,7 +3,6 @@ package org.example;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,9 +20,6 @@ public class JsonReader {
             // convert JSON string to Island object
             island = mapper.readValue(getFileFromResource(path), Island.class);
 
-            // print Island
-//            System.out.println(island.toString());
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -36,14 +32,12 @@ public class JsonReader {
         URL resource = classLoader.getResource(fileName);
         if (resource == null) {
             throw new IllegalArgumentException("file not found! " + fileName);
-        } else {
-
+        }
+        else{
             // failed if files have whitespaces or special characters
             //return new File(resource.getFile());
-
             return new File(resource.toURI());
         }
-
     }
 
 }

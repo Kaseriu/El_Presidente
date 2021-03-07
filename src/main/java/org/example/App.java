@@ -9,9 +9,6 @@ public class App {
         boolean stop = false;
         boolean back;
         Game game = new Game();
-
-
-
         Scanner scanner = new Scanner(System.in);
 
         while (!stop) {
@@ -26,7 +23,6 @@ public class App {
                 case "stop":
                     stop = true;
                     break;
-
                 case "":
                     while (!back) {
                         System.out.println("Choisissez un scénario ou taper back pour retourner en arrière :");
@@ -42,7 +38,6 @@ public class App {
                             else {
                                 System.out.println("Taper un chiffre");
                             }
-
                         }
                         else {
                             if (Integer.parseInt(input) > 4 || Integer.parseInt(input) <= 0) {
@@ -56,10 +51,8 @@ public class App {
                                 game.gameStart();
                             }
                         }
-
                     }
                     break;
-
                 default:
                     System.out.println("Mauvaise saisie");
             }

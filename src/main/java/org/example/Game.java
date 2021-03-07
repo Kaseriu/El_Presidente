@@ -18,14 +18,6 @@ public class Game {
 
     }
 
-    public HashMap<String, String> getScenarios() {
-        return this.scenarios;
-    }
-
-    public int getSeasons() {
-        return this.seasons;
-    }
-
     public String[][] displayScenarios() {
 
         String[][] chaine = new String[4][3];
@@ -68,16 +60,7 @@ public class Game {
 
         while (!endGame) {
 
-            event = getRandomEvent();
-            if (previousEvent != null) {
-                while (event == previousEvent) {
-                    event = getRandomEvent();
-                }
-            }
-            if (event.getSeasons() != 0 && event.getSeasons() != this.seasons) {
-                event = getRandomEvent();
-            }
-
+            event = getRandomEvent(previousEvent);
 
             choices = event.getChoices();
             input = "0";
@@ -91,7 +74,6 @@ public class Game {
                 while (!validChoice) {
 
                     for (Choices choice: choices) {
-
                         System.out.println(i + " - " + choice.getChoice());
                         i++;
                     }
@@ -143,17 +125,7 @@ public class Game {
                         while (!exitCondition) {
 
                             System.out.println("Fonds disponible : " + island.getTreasury() + "$");
-                            i = 1;
-                            for (Faction faction: factions) {
-
-                                if (!faction.getName().equals("Loyalists")) {
-                                    System.out.println(i + " - " + faction.getName() + " - Satisfaction : "
-                                            + faction.getSatisfactionPercentage() + "% - Cout : "
-                                            + faction.getNumberOfPartisans()*15 + "$");
-                                    i++;
-                                }
-                            }
-                            System.out.println(i + " - " + "Retour");
+                            this.island.displayFactionsForBribe();
 
                             input = scanner.nextLine();
 
@@ -244,13 +216,21 @@ public class Game {
         }
     }
 
-    public Events getRandomEvent() {
+    public Events getRandomEvent(Events previousEvent) {
 
         Random random = new Random();
         List<Events> events = this.island.getEvents();
+        Events event = events.get(random.nextInt(events.size()));
+        if (previousEvent != null) {
+            while (event == previousEvent) {
+                event = events.get(random.nextInt(events.size()));
+            }
+        }
+        if (event.getSeasons() != 0 && event.getSeasons() != this.seasons) {
+            event = events.get(random.nextInt(events.size()));
+        }
 
-
-        return events.get(random.nextInt(events.size()));
+        return event;
     }
 
     public void updateFromChoice(Island island, List<Effect> effects) {
@@ -259,6 +239,7 @@ public class Game {
 
         updateFactionFromChoice(factions, effects);
         updateFactorFromChoice(island, effects);
+        updatePartisansFromChoice(factions, effects);
     }
 
     public void updateFactionFromChoice(List<Faction> factions, List<Effect> effects) {
@@ -299,6 +280,24 @@ public class Game {
                     case "TREASURY":
                         island.updateTreasury(actionOnFactor.get(i));
                         break;
+                }
+            }
+        }
+    }
+    public void updatePartisansFromChoice(List<Faction> factions, List<Effect> effects){
+        int partisans;
+        for (Effect effect: effects) {
+            partisans = effect.getPartisans();
+            Random random = new Random();
+
+            while (partisans != 0){
+                if(partisans<0){
+                    factions.get(random.nextInt(8)).updatePartisans(-1);
+                    partisans++;
+                }
+                else {
+                    factions.get(random.nextInt(8)).updatePartisans(1);
+                    partisans--;
                 }
             }
         }

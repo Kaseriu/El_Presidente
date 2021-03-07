@@ -56,5 +56,4 @@ public class Faction {
         updateSatisfaction(-2);
     }
 
-
 }
