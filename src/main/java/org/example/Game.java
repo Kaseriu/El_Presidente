@@ -42,8 +42,6 @@ public class Game {
     }
 
     public void launchScenario(String choice) {
-
-
         this.island = JsonReader.setupIslandFromJson(this.scenarios.get(choice));
     }
 

@@ -1,0 +1,412 @@
+{
+  "name": "Sandbox",
+  "story": "Bienvenu dans le mode bac à sable",
+  "difficulty": "NORMAL",
+  "agriculturePercentage": 15,
+  "industryPercentage": 15,
+  "treasury": 200,
+  "foodUnits": 560,
+  "factions": [
+    {
+      "name": "Capitalists",
+      "satisfactionPercentage": 50,
+      "numberOfPartisans": 15
+    },
+    {
+      "name": "Communists",
+      "satisfactionPercentage": 50,
+      "numberOfPartisans": 15
+    },
+    {
+      "name": "Liberals",
+      "satisfactionPercentage": 50,
+      "numberOfPartisans": 15
+    },
+    {
+      "name": "Religious",
+      "satisfactionPercentage": 50,
+      "numberOfPartisans": 15
+    },
+    {
+      "name": "Militarists",
+      "satisfactionPercentage": 50,
+      "numberOfPartisans": 15
+    },
+    {
+      "name": "Ecologists",
+      "satisfactionPercentage": 50,
+      "numberOfPartisans": 15
+    },
+    {
+      "name": "Loyalists",
+      "satisfactionPercentage": 100,
+      "numberOfPartisans": 15
+    },
+    {
+      "name": "Nationalists",
+      "satisfactionPercentage": 50,
+      "numberOfPartisans": 15
+    }
+  ],
+  "events": [
+    {
+      "name": "La montée en puissance des capitalistes dans votre pays se fait de plus en plus proche.",
+      "seasons" : 0,
+      "choices": [
+        {
+          "choice": "Je mets en place une doctrine : le containment pour les contenir",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "COMMUNISTS": 20,
+                "LIBERALS": 10,
+                "CAPITALISTS": -20
+              }
+            }
+          ]
+        },
+        {
+          "choice": "Je ne fais rien j'attends que ça passe",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "NATIONALISTS": -10,
+                "CAPITALISTS": 5,
+                "COMMUNISTS": -20
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "La montée en puissance des communistes dans votre pays se fait de plus en plus proche.",
+      "seasons" : 0,
+      "choices": [
+        {
+          "choice": "Je mets en place une doctrine : le containment pour les contenir",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "COMMUNISTS": -20,
+                "NATIONALISTS": 10,
+                "CAPITALISTS": 20
+              }
+            }
+          ]
+        },
+        {
+          "choice": "Je ne fais rien j'attends que ça passe",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "LIBERALS": -10,
+                "CAPITALISTS": -20,
+                "COMMUNISTS": 5
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Des pays vous proposent une alliance militaire",
+      "seasons" : 0,
+      "choices": [
+        {
+          "choice": "J'accepte afin d'agrandir mes capacités de riposte",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "MILITARISTS": 20,
+                "NATIONALISTS": 20,
+                "RELIGIOUS": -10
+              }
+            },
+            {
+              "actionOnFactor": {
+                "TREASURY": -200,
+                "INDUSTRY": 10
+              }
+            }
+          ],
+          "relatedEvents": [
+            {
+              "name": "Ils vous proposent maintenant de rejoindre une alliance économique",
+              "choices": [
+                {
+                  "choice": "J'accepte'",
+                  "effects": [
+                    {
+                      "actionOnFaction": {
+                        "CAPITALISTS": 15,
+                        "RELIGIOUS": -5,
+                        "MILITARISTS": 10,
+                        "NATIONALISTS": 10,
+                        "COMMUNISTS": -40,
+                        "LIBERALS": 10
+                      }
+                    },
+                    {
+                      "actionOnFactor": {
+                        "TREASURY": 250
+                      }
+                    }
+                  ]
+                },
+                {
+                  "choice": "Je refuse",
+                  "effects": [
+                    {
+                      "actionOnFaction": {
+                        "CAPITALISTS": -20,
+                        "LIBERALS": -10,
+                        "RELIGIOUS": 10
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "choice": "Je refuse, je n'ai besoin de personne",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "ECOLOGISTS": 10,
+                "RELIGIOUS": 5,
+                "MILITARISTS": -15
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Une tempête de neige s'abat sur votre pays ! Que faites-vous ?",
+      "seasons": 3,
+      "choices": [
+        {
+          "choice": "J'envoie l'armé distribuer de la nourriture à la population",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "MILITARISTS": -10,
+                "RELIGIOUS": 10,
+                "NATIONALISTS": 20,
+                "CAPITALISTS": -20,
+                "LIBERALS": 10
+              }
+            },
+            {
+              "actionOnFactor": {
+                "foodUnits": -50,
+                "TREASURY": -100
+              }
+            }
+          ]
+        },
+        {
+          "choice": "Je ne fais rien",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "RELIGIOUS": -20,
+                "NATIONALISTS": -20,
+                "CAPITALISTS": 20,
+                "LIBERALS": -10
+              }
+            },
+            {
+              "partisans": -13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Une canicule s'abat sur votre pays ! Que faites-vous ?",
+      "seasons": 1,
+      "choices": [
+        {
+          "choice": "J'aide financièrement les agriculteurs",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "RELIGIOUS": 10,
+                "NATIONALISTS": 20,
+                "CAPITALISTS": -20,
+                "LIBERALS": 10
+              }
+            },
+            {
+              "actionOnFactor": {
+                "TREASURY": -100
+              }
+            }
+          ]
+        },
+        {
+          "choice": "Je ne fais rien",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "RELIGIOUS": -20,
+                "NATIONALISTS": -20,
+                "CAPITALISTS": 20,
+                "LIBERALS": -10
+              }
+            },
+            {
+              "agriculturePercentage": -10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "L’Organisation des Caraïbes-Unies souhaite que vous accueillez des réfugiés climatiques suites aux récentes inondations dans la région",
+      "seasons": 2,
+      "choices": [
+        {
+          "choice": "Décliner poliment au motif que vous n’avez pas les infrastructures pour eux",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "RELIGIOUS": -15,
+                "LIBERALS": -15
+              }
+            }
+          ]
+        },
+        {
+          "choice": "Décliner au motif qu’ils ne sont pas du même culte que vous",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "RELIGIOUS": 15,
+                "LIBERALS": -30
+              }
+            }
+          ]
+        },
+        {
+          "choice": "Accepter sans condition",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "RELIGIOUS": 10,
+                "LIBERALS": 10,
+                "NATIONALISTS": -20
+              }
+            }
+          ]
+        },
+        {
+          "choice": "Accepter sous condition d’aide financière de la part de l’OCU",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "NATIONALISTS": -20,
+                "CAPITALISTS": 10
+              }
+            },
+            {
+              "actionOnFactor": {
+                "treasury": 200
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Vous avez découvert un gisement d’or ! Que faire ?",
+      "seasons" : 0,
+      "choices": [
+        {
+          "choice": "Utilisons-le pour améliorer le bien-être des citoyens !",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "COMMUNISTS": 10,
+                "CAPITALISTS": -30
+              }
+            },
+            {
+              "actionOnFactor": {
+                "industryPercentage": 10
+              }
+            }
+          ]
+        },
+        {
+          "choice": "Exploitons-le au maximum pour moderniser le pays !",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "COMMUNISTS": 10,
+                "ECOLOGISTS": -20,
+                "CAPITALISTS": 10
+              }
+            },
+            {
+              "actionOnFactor": {
+                "industryPercentage": 20
+              }
+            }
+          ]
+        },
+        {
+          "choice": "Vendons les terrains à l’Empire du Dragon et renflouons nos comptes secrets",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "NATIONALISTS": -30,
+                "LOYALISTS": 15
+              }
+            },
+            {
+              "actionOnFactor": {
+                "treasury": 200
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Un ouragan va frapper l’île ! Sauvons El Presidente !",
+      "seasons" : 0,
+      "choices": [
+        {
+          "choice": "Se mettre à l’abri",
+          "effects": [
+            {
+              "actionOnFaction": {
+                "CAPITALISTS": -20,
+                "COMMUNISTS": -20,
+                "LIBERALS": -20,
+                "RELIGIOUS": -20,
+                "MILITARISTS": -20,
+                "ECOLOGISTS": -20,
+                "NATIONALISTS": -20
+              }
+            },
+            {
+              "actionOnFactor": {
+                "industryPercentage": -20,
+                "agriculturePercentage": -10
+              }
+            },
+            {
+              "partisans": -10
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
